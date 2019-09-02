@@ -1,0 +1,19 @@
+http://activemq.apache.org/apollo/download.html
+
+http://activemq.apache.org/apollo/documentation/getting-started.html
+
+
+tar -zxvf apache-apollo-1.7.1-unix-distro.tar.gz
+
+jar -xvf apache-apollo-1.7.1-windows-distro.zip
+
+
+/var/lib/mybroker/bin/apollo-broker run
+
+http://127.0.0.1:61680/
+https://127.0.0.1:61681/
+
+用户名 
+admin 
+密码
+password.

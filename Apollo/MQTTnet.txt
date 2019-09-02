@@ -1,0 +1,5 @@
+https://github.com/chkr1011/MQTTnet
+
+https://www.cnblogs.com/zeroes/p/mqttnet.html
+
+https://www.nuget.org/packages/MQTTnet/

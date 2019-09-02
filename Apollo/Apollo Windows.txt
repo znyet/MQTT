@@ -1,0 +1,69 @@
+下载
+http://activemq.apache.org/apollo/download.html
+http://www.apache.org/dyn/closer.cgi?path=activemq/activemq-apollo/1.7.1/apache-apollo-1.7.1-windows-distro.zip
+
+客户端
+MQTTnet
+
+用法
+https://blog.csdn.net/u012377333/article/details/68943416
+
+
+2.Apollo安装
+
+步骤1：
+cd D:\apache-apollo-1.7.1\bin           -------定位到本地文件夹bin目录
+
+步骤2：
+.\apollo.cmd create MqttBroker          -------创建本地的MqttBroker文件夹
+
+步骤3：
+cd MqttBroker\bin                       -------定位到MqttBroker文件夹
+
+.\apollo-broker run             -------临时运行
+
+-----------------------安装服务----------------------------------------
+
+步骤4：
+.\apollo-broker-service install         --------安装服务
+
+步骤5：
+.\apollo-broker-service start           --------启动服务
+
+.\apollo-broker-service stop            --------停止服务
+
+.\apollo-broker-service uninstall       --------卸载服务
+
+三 登录网页，并修改ip地址，以供局域网连接
+
+在浏览器中http://127.0.0.1:61680/console/index.html#，
+初始用户名为admin，密码是password，打开之后，选择configration下
+
+选择apollo.xml文件，修改<host_name>属性为服务器ip,web_admin同步修改，以及tcp节点下，
+将默认的tcp://0.0.0.0:61613修改为服务器的ip，以供局域网使用。点击保存，即可在局域网内使用服务器的ip登录。
+
+
+1.网上下载MQTT.fx工具，打开后设置参数，该连接模式为tcp方式，
+所以需要参考服务器端tcp模式的设定，
+设定主要参数未Broker Address和Broker Port，
+以及User Credentials下的用户名和密码，如下图所示，配置完成，点击connect，连接至MQTT服务器。
+
+
+用户名密码
+
+apollo.xml 为网络配置信息，其他的不用管最主要的
+<connector id="tcp" bind="tcp://0.0.0.0:61613" connection_limit="2000"/>
+connection_limit连接限制条数2000，就是说超过2000就GG了。可不可以修改等连接到了2000条的时候更改试试。
+
+groups.properties 用于增加用户
+
+原本为： admins=admin
+增加test用户： admins=admin|test（中间用|分开）
+
+users.properties  用于设置用户的账号密码
+
+用户名=密码
+原本为：        admin=password
+增加test用户：  
+admin=password
+test=test    (下面新增一列,此处与groups.properties文件对应)
