@@ -1,0 +1,33 @@
+https://blog.csdn.net/leytton/article/details/51896738
+
+
+
+
+//创建客户端实例
+MqttClient client = new MqttClient(IPAddress.Parse(MQTT_BROKER_ADDRESS)); //主机为IP时
+MqttClient client = new MqttClient(MQTT_BROKER_ADDRESS); //当主机地址为域名时
+ 
+// 注册消息接收处理事件，还可以注册消息订阅成功、取消订阅成功、与服务器断开等事件处理函数
+client.MqttMsgPublishReceived += client_MqttMsgPublishReceived; 
+ 
+//生成客户端ID并连接服务器
+string clientId = Guid.NewGuid().ToString(); 
+client.Connect(clientId); 
+ 
+// 订阅主题"/home/temperature" 消息质量为 2 
+client.Subscribe(new string[] { "/home/temperature" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE }); 
+ 
+... 
+ 
+void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e) 
+{ 
+//处理接收到的消息
+string msg = System.Text.Encoding.Default.GetString(e.Message);
+        textBox1.AppendText("收到消息:" + msg + "\r\n");
+}
+
+
+----------------------------
+
+// 发布消息到主题 "/home/temperature" 消息质量为 2,不保留 
+client.Publish("/home/temperature", Encoding.UTF8.GetBytes("hello"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false); 

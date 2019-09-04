@@ -1,0 +1,9 @@
+//发布
+var data = Encoding.UTF8.GetBytes("111111");
+
+1、
+client.Publish("akka2", data, MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, false); //消息不保存
+
+2、
+client.Publish("akka2", data, MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true); //消息会保存，客户端重启会一直收到最后一条消息
+client.Publish("akka2", null, MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, true); // 发布一条空消息 去掉消息保存
